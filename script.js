@@ -28,15 +28,47 @@ const images = [
     },
 ]
 const row=document.getElementById('row')
+const nextBtn=document.getElementById('nextBtn');
+const prevBtn=document.getElementById('prevBtn');
+let imgContainer=[]
+let indexActive=0
 for(let i=0; i<images.length;i++){
+    createImg(i,images,imgContainer)
+}
+console.log(imgContainer)
+add(imgContainer,indexActive,'active')
+remove(imgContainer,indexActive,'d-none')
+nextBtn.addEventListener('click', function(){
+    remove(imgContainer,indexActive,'active')
+    add(imgContainer,indexActive,'d-none')
+    indexActive++
+    if(indexActive===images.length){
+        indexActive=0;
+    }
+    remove(imgContainer, indexActive, 'd-none')
+    add(imgContainer, indexActive, 'active')
+})
+
+
+
+
+
+
+
+
+function createImg(index,array,array2){
     let imgCont=document.createElement('div')
-    imgCont.classList.add('col-12')
+    imgCont.classList.add('col-12','position-relative')
     let newImg=document.createElement('img')
-    newImg.setAttribute('src', images[i].url)
-
-
-
-
+    newImg.setAttribute('src', array[index].url)
+    newImg.classList.add('d-none')
+    array2.push(newImg)
     row.append(imgCont)
     imgCont.append(newImg)
+}
+function add(element,index,clas){
+    element[index].classList.add(clas)
+}
+function remove(element,index,clas){
+    element[index].classList.remove(clas)
 }
