@@ -31,14 +31,16 @@ const row=document.getElementById('row')
 const nextBtn=document.getElementById('nextBtn');
 const prevBtn=document.getElementById('prevBtn');
 let imgContainer=[]
+let locationCont=[]
 let indexActive=0
 //! Populating the array
 for(let i=0; i<images.length;i++){
-    createImg(i,images,imgContainer)
+    createImg(i,images,imgContainer,locationCont)
 }
-console.log(imgContainer)
+console.log(locationCont)
 add(imgContainer,indexActive,'active')
 remove(imgContainer,indexActive,'d-none')
+add(locationCont,indexActive,'active')
 //! eventListener for the next Button
 goNext(nextBtn,indexActive,imgContainer)
 
@@ -56,14 +58,19 @@ goPrev(prevBtn,indexActive,imgContainer)
 
 
 
-function createImg(index,array,array2){
+function createImg(index,array,array2,array3){
     let imgCont=document.createElement('div')
     imgCont.classList.add('col-12','position-relative')
     let newImg=document.createElement('img')
     newImg.setAttribute('src', array[index].url)
     newImg.classList.add('d-none')
+    let location=document.createElement('h2')
+    location.classList.add('position-absolute','mc-z-index','d-none')
+    let inner=array[index].title
+    array3.push(inner)
     array2.push(newImg)
     row.append(imgCont)
+    row.append(location)
     imgCont.append(newImg)
 }
 function add(element,index,clas){
