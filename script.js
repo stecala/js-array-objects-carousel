@@ -32,22 +32,22 @@ const nextBtn=document.getElementById('nextBtn');
 const prevBtn=document.getElementById('prevBtn');
 let imgContainer=[]
 let indexActive=0
+//! Populating the array
 for(let i=0; i<images.length;i++){
     createImg(i,images,imgContainer)
 }
 console.log(imgContainer)
 add(imgContainer,indexActive,'active')
 remove(imgContainer,indexActive,'d-none')
-nextBtn.addEventListener('click', function(){
-    remove(imgContainer,indexActive,'active')
-    add(imgContainer,indexActive,'d-none')
-    indexActive++
-    if(indexActive===images.length){
-        indexActive=0;
-    }
-    remove(imgContainer, indexActive, 'd-none')
-    add(imgContainer, indexActive, 'active')
-})
+//! eventListener for the next Button
+goNext(nextBtn,indexActive,imgContainer)
+
+//! eventListener for the Previous Button
+goPrev(prevBtn,indexActive,imgContainer)
+
+
+
+
 
 
 
@@ -71,4 +71,28 @@ function add(element,index,clas){
 }
 function remove(element,index,clas){
     element[index].classList.remove(clas)
+}
+function goNext(btn,i,array){
+    btn.addEventListener('click', function(){
+        remove(array,i,'active')
+        add(array,i,'d-none')
+        i++
+        if(i===images.length){
+            i=0;
+        }
+        remove(array, i, 'd-none')
+        add(array, i, 'active')
+    })
+}
+function goPrev(btn,i,array){
+    btn.addEventListener('click', function(){
+        remove(array,i,'active')
+        add(array,i,'d-none')
+        i--
+        if(i===-1){
+            i=images.length-1
+        }
+        remove(array, i, 'd-none')
+        add(array, i, 'active')
+    })
 }
