@@ -30,22 +30,22 @@ const images = [
 const row=document.getElementById('row')
 const nextBtn=document.getElementById('nextBtn');
 const prevBtn=document.getElementById('prevBtn');
-let imgContainer=[]
-let locationCont=[]
+let imgsContainer=[]
 let indexActive=0
 //! Populating the array
 for(let i=0; i<images.length;i++){
-    createImg(i,images,imgContainer,locationCont)
+    createSlide(i,images,imgsContainer)
 }
-console.log(locationCont)
-add(imgContainer,indexActive,'active')
-remove(imgContainer,indexActive,'d-none')
-add(locationCont,indexActive,'active')
+//! adding and removing the visibility of the images 
+console.log(imgsContainer)
+add(imgsContainer,indexActive,'active')
+remove(imgsContainer,indexActive,'d-none')
+
 //! eventListener for the next Button
-goNext(nextBtn,indexActive,imgContainer)
+goNext(nextBtn,indexActive,imgsContainer)
 
 //! eventListener for the Previous Button
-goPrev(prevBtn,indexActive,imgContainer)
+goPrev(prevBtn,indexActive,imgsContainer)
 
 
 
@@ -57,20 +57,20 @@ goPrev(prevBtn,indexActive,imgContainer)
 
 
 
-
-function createImg(index,array,array2,array3){
+function createSlide(index,imgData,slides){
     let imgCont=document.createElement('div')
-    imgCont.classList.add('col-12','position-relative')
+    imgCont.classList.add('col-12','position-relative','d-none')
     let newImg=document.createElement('img')
-    newImg.setAttribute('src', array[index].url)
-    newImg.classList.add('d-none')
+    newImg.setAttribute('src', imgData[index].url)
     let location=document.createElement('h2')
-    location.classList.add('position-absolute','mc-z-index','d-none')
-    let inner=array[index].title
-    array3.push(inner)
-    array2.push(newImg)
+    location.classList.add('position-absolute','mc-z-index', 'p-3')
+    location.innerHTML=imgData[index].title
+
+
+
+    slides.push(imgCont)
     row.append(imgCont)
-    row.append(location)
+    imgCont.append(location)
     imgCont.append(newImg)
 }
 function add(element,index,clas){

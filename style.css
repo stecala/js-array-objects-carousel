@@ -9,3 +9,7 @@ img{
 .mc-z-index{
     z-index: 3;
 }
+h2{
+    text-shadow: 2px 2px black;
+    color: white;
+}
