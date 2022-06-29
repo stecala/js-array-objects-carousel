@@ -103,6 +103,7 @@ function createSlide(index,imgData,slides){
     imgCont.classList.add('col-12','position-relative','d-none')
     let newImg=document.createElement('img')
     newImg.setAttribute('src', imgData[index].url)
+    newImg.classList.add('box-shadow')
     let location=document.createElement('h2')
     location.classList.add('position-absolute','mc-z-index', 'p-3')
     location.innerHTML=imgData[index].title
@@ -133,7 +134,7 @@ function createThumb(index, imgData, slides){
     imgContThumb.classList.add('col-2','d-flex','justify-content-around', 'to-select', 'py-2')
     let newImgThumb=document.createElement('img')
     newImgThumb.setAttribute('src', imgData[index].url)
-    newImgThumb.classList.add('thumb-height', 'border-radius')
+    newImgThumb.classList.add('thumb-height', 'border-radius', 'box-shadow')
     slides.push(imgContThumb)
     thumb.append(imgContThumb)
     imgContThumb.append(newImgThumb)

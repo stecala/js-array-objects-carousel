@@ -1,6 +1,6 @@
 body{
     background-image: linear-gradient(rgb(255, 115, 208), rgb(255, 255, 155));
-    height: 102vh;
+    height: 103vh;
     background-repeat: no-repeat;
 }
 img{
@@ -68,5 +68,11 @@ footer{
     width: 75px;
     border-radius: 5px;
     cursor: pointer;
-    background-color: tomato;
+    background-color: rgb(116, 175, 243);
+    color:white;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.box-shadow{
+    box-shadow: rgba(0, 0, 0, 0.37) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
