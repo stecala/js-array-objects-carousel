@@ -1,3 +1,7 @@
+body{
+    background-image: linear-gradient(rgb(255, 115, 208), rgb(255, 255, 155));
+    height: 100vh;
+}
 img{
     width: 100%;
     height: 600px;
@@ -49,4 +53,15 @@ h2{
 }
 .left-arrow{
     left:0;
+}
+footer{
+    width: 100%;
+    height: 5rem;
+}
+#stopBtn, #startBtn, #reverseBtn{
+    margin: 10px auto;
+    width: 75px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: tomato;
 }

@@ -46,14 +46,51 @@ remove(imgsContainer,indexActive,'d-none')
 add(imgsThumbContainer,indexActive,'active-thumb')
 remove(imgsThumbContainer,indexActive,'to-select')
 //! eventListener for the next Button
-goNext(nextBtn, imgsContainer, imgsThumbContainer)
+addRightButtonListener(nextBtn, imgsContainer, imgsThumbContainer)
 
 //! eventListener for the Previous Button
-goPrev(prevBtn, imgsContainer, imgsThumbContainer)
+addPrevButtonListener(prevBtn, imgsContainer, imgsThumbContainer)
 
+//* Temporal function
+const stopTimer=document.getElementById('stopBtn')
+const restartTimer=document.getElementById('startBtn')
+let checkInterval=false
+const reverseBtn=document.getElementById('reverseBtn')
 
+//! if is true goes right otherwise goes left
+let directionTimer=true
+reverseBtn.addEventListener('click', function(){
+    //! inversion of boolean let inside the function of reverse
+    directionTimer=!directionTimer
+})
+let slideInterval=setInterval(()=>{
+    if(directionTimer){
+        goNext(imgsContainer, imgsThumbContainer)
+    }
+    else{
+        goBack(imgsContainer, imgsThumbContainer)
+    }
+}, 3000)
 
-
+//! Stop zone 
+stopTimer.addEventListener('click', function(){
+    clearInterval(slideInterval)
+    checkInterval=true    
+})
+restartTimer.addEventListener('click', function(){
+    if(checkInterval){
+        //! here the timer has not already started
+        slideInterval=setInterval(()=>{
+            if(directionTimer){
+                goNext(imgsContainer, imgsThumbContainer)
+            }
+            else{
+                goBack(imgsContainer, imgsThumbContainer)
+            }
+        }, 3000)
+        checkInterval=false
+    }
+})
 
 
 
@@ -85,25 +122,51 @@ function add(element,index,clas){
 function remove(element,index,clas){
     element[index].classList.remove(clas)
 }
-function goNext(btn, array, arrayThumb){
-    btn.addEventListener('click', function(){
-        remove(array,indexActive,'active')
-        add(array,indexActive,'d-none')
-        remove(arrayThumb,indexActive, 'active-thumb')
-        add(arrayThumb,indexActive, 'to-select')
-        indexActive++
-        if(indexActive===images.length){
-            indexActive=0;
-        }
-        remove(array, indexActive, 'd-none')
-        add(array, indexActive, 'active')
-        remove(arrayThumb,indexActive,'to-select')
-        add(arrayThumb, indexActive, 'active-thumb')
-    })
+function addRightButtonListener(btn, array, arrayThumb){
+    btn.addEventListener('click', ()=>goNext(array, arrayThumb))
 }
-function goPrev(btn, array, arrayThumb){
-    btn.addEventListener('click', function(){
-        remove(array,indexActive,'active')
+function addPrevButtonListener(btn, array, arrayThumb){
+    btn.addEventListener('click', ()=>goBack(array, arrayThumb))
+}
+function createThumb(index, imgData, slides){
+    let imgContThumb=document.createElement('div')
+    imgContThumb.classList.add('col-2','d-flex','justify-content-around', 'to-select', 'py-2')
+    let newImgThumb=document.createElement('img')
+    newImgThumb.setAttribute('src', imgData[index].url)
+    newImgThumb.classList.add('thumb-height')
+    slides.push(imgContThumb)
+    thumb.append(imgContThumb)
+    imgContThumb.append(newImgThumb)
+    imgContThumb.addEventListener('click', function(){
+        remove(imgsContainer,indexActive,'active')
+        add(imgsContainer,indexActive,'d-none')
+        remove(slides,indexActive,'active-thumb')
+        add(slides,indexActive,'to-select')
+        add(slides, index,'active-thumb')
+        remove(slides,index,'to-select')
+        remove(imgsContainer, index, 'd-none')
+        add(imgsContainer, index, 'active')
+        indexActive=index
+    })
+    
+}
+
+function goNext(array, arrayThumb){
+    remove(array,indexActive,'active')
+    add(array,indexActive,'d-none')
+    remove(arrayThumb,indexActive, 'active-thumb')
+    add(arrayThumb,indexActive, 'to-select')
+    indexActive++
+    if(indexActive===images.length){
+        indexActive=0;
+    }
+    remove(array, indexActive, 'd-none')
+    add(array, indexActive, 'active')
+    remove(arrayThumb,indexActive,'to-select')
+    add(arrayThumb, indexActive, 'active-thumb')
+}
+function goBack(array, arrayThumb){
+    remove(array,indexActive,'active')
         add(array,indexActive,'d-none')
         remove(arrayThumb,indexActive, 'active-thumb')
         add(arrayThumb,indexActive, 'to-select')
@@ -115,15 +178,4 @@ function goPrev(btn, array, arrayThumb){
         add(array, indexActive, 'active')
         remove(arrayThumb,indexActive,'to-select')
         add(arrayThumb, indexActive, 'active-thumb')
-    })
-}
-function createThumb(index, imgData, slides){
-    let imgContThumb=document.createElement('div')
-    imgContThumb.classList.add('col-2','d-flex','justify-content-around', 'to-select', 'py-2')
-    let newImgThumb=document.createElement('img')
-    newImgThumb.setAttribute('src', imgData[index].url)
-    newImgThumb.classList.add('thumb-height')
-    slides.push(imgContThumb)
-    thumb.append(imgContThumb)
-    imgContThumb.append(newImgThumb)
-}
+    }
