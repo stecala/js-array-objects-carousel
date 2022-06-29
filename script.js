@@ -31,22 +31,25 @@ const row=document.getElementById('row')
 const nextBtn=document.getElementById('nextBtn')
 const prevBtn=document.getElementById('prevBtn')
 let imgsContainer=[]
+let imgsThumbContainer=[]
 let indexActive=0
 const thumb = document.getElementById('thumb')
 //! Populating the array
 for(let i=0; i<images.length;i++){
     createSlide(i,images,imgsContainer)
+    createThumb(i, images, imgsThumbContainer)
 }
 //! adding and removing the visibility of the images 
 console.log(imgsContainer)
 add(imgsContainer,indexActive,'active')
 remove(imgsContainer,indexActive,'d-none')
-
+add(imgsThumbContainer,indexActive,'active-thumb')
+remove(imgsThumbContainer,indexActive,'to-select')
 //! eventListener for the next Button
-goNext(nextBtn, imgsContainer)
+goNext(nextBtn, imgsContainer, imgsThumbContainer)
 
 //! eventListener for the Previous Button
-goPrev(prevBtn, imgsContainer)
+goPrev(prevBtn, imgsContainer, imgsThumbContainer)
 
 
 
@@ -82,40 +85,45 @@ function add(element,index,clas){
 function remove(element,index,clas){
     element[index].classList.remove(clas)
 }
-function goNext(btn, array){
+function goNext(btn, array, arrayThumb){
     btn.addEventListener('click', function(){
         remove(array,indexActive,'active')
         add(array,indexActive,'d-none')
+        remove(arrayThumb,indexActive, 'active-thumb')
+        add(arrayThumb,indexActive, 'to-select')
         indexActive++
         if(indexActive===images.length){
             indexActive=0;
         }
         remove(array, indexActive, 'd-none')
         add(array, indexActive, 'active')
-        console.log(indexActive+'next',indexActive)
+        remove(arrayThumb,indexActive,'to-select')
+        add(arrayThumb, indexActive, 'active-thumb')
     })
 }
-function goPrev(btn, array){
+function goPrev(btn, array, arrayThumb){
     btn.addEventListener('click', function(){
         remove(array,indexActive,'active')
         add(array,indexActive,'d-none')
+        remove(arrayThumb,indexActive, 'active-thumb')
+        add(arrayThumb,indexActive, 'to-select')
         indexActive--
         if(indexActive===-1){
             indexActive=images.length-1
         }
         remove(array, indexActive, 'd-none')
         add(array, indexActive, 'active')
-        console.log(indexActive+'prev',indexActive)
-
+        remove(arrayThumb,indexActive,'to-select')
+        add(arrayThumb, indexActive, 'active-thumb')
     })
 }
-
-
-function createThumb(index, imgData){
+function createThumb(index, imgData, slides){
     let imgContThumb=document.createElement('div')
-    imgContThumb.classList.add('col-2')
+    imgContThumb.classList.add('col-2','d-flex','justify-content-around', 'to-select', 'py-2')
     let newImgThumb=document.createElement('img')
     newImgThumb.setAttribute('src', imgData[index].url)
+    newImgThumb.classList.add('thumb-height')
+    slides.push(imgContThumb)
     thumb.append(imgContThumb)
     imgContThumb.append(newImgThumb)
 }

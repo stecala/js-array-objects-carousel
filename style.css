@@ -6,6 +6,12 @@ img{
 .active{
     display: block;
 }
+.active-thumb{
+    border: 2px solid black;
+}
+.to-select{
+    opacity: 0.5;
+}
 .mc-z-index{
     z-index: 3;
 }
@@ -25,11 +31,22 @@ h2{
     height: 25px;
     text-decoration: none;
     color: rgb(255, 255, 255);
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 50%;
     padding: 5px;
     cursor: pointer;
 }
 .positin-arrow-right{
     right: 0;
+}
+
+.thumb-height{
+    height: 150px;
+    object-fit: cover;
+}
+.top-arrow{
+    top:40%;
+}
+.left-arrow{
+    left:0;
 }
