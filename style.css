@@ -1,6 +1,7 @@
 body{
     background-image: linear-gradient(rgb(255, 115, 208), rgb(255, 255, 155));
-    height: 100vh;
+    height: 102vh;
+    background-repeat: no-repeat;
 }
 img{
     width: 100%;
@@ -12,6 +13,10 @@ img{
 }
 .active-thumb{
     border: 2px solid black;
+    border-radius: 10px;
+}
+.border-radius{
+    border-radius: 10px;
 }
 .to-select{
     opacity: 0.5;

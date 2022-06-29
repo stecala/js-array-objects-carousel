@@ -133,7 +133,7 @@ function createThumb(index, imgData, slides){
     imgContThumb.classList.add('col-2','d-flex','justify-content-around', 'to-select', 'py-2')
     let newImgThumb=document.createElement('img')
     newImgThumb.setAttribute('src', imgData[index].url)
-    newImgThumb.classList.add('thumb-height')
+    newImgThumb.classList.add('thumb-height', 'border-radius')
     slides.push(imgContThumb)
     thumb.append(imgContThumb)
     imgContThumb.append(newImgThumb)
