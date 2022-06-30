@@ -131,7 +131,7 @@ function addPrevButtonListener(btn, array, arrayThumb){
 }
 function createThumb(index, imgData, slides){
     let imgContThumb=document.createElement('div')
-    imgContThumb.classList.add('col-2','d-flex','justify-content-around', 'to-select', 'py-2')
+    imgContThumb.classList.add('col-2','d-flex','justify-content-around', 'to-select', 'py-2','cursor-pointer')
     let newImgThumb=document.createElement('img')
     newImgThumb.setAttribute('src', imgData[index].url)
     newImgThumb.classList.add('thumb-height', 'border-radius', 'box-shadow')
